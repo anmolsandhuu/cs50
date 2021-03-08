@@ -518,3 +518,8 @@ ls -al
 touch gitinit
 git pull .*
 git pull https://github.com/anmolsandhuu/cs50.git
+git add .
+git commit -m ""
+git commit -m " "
+git commit -m "."
+git push origin master

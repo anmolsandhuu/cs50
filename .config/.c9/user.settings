@@ -24,7 +24,7 @@
         "@show": false
     },
     "projecttree": {
-        "@showhidden": false
+        "@showhidden": true
     },
     "tabs": {
         "@asterisk": false,
