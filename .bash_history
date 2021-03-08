@@ -506,3 +506,15 @@ git add .
 git stage
 git add .
 git stage
+git add .
+git commit -m"wokring on week 3"
+git config --global user.email "anmolsandhu06@gmail.com"
+git config --global user.name "Anmol Singh Sandhu"
+git commit -m "wokring on week 3"
+git remote add origin https://github.com/anmolsandhuu/cs50.git
+git push origin master
+ls
+ls -al
+touch gitinit
+git pull .*
+git pull https://github.com/anmolsandhuu/cs50.git
