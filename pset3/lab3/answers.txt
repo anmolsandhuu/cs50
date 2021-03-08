@@ -1,0 +1,11 @@
+sort1 uses: bubble Sort
+
+How do you know?: It took 17 ms for sorting random 50000 but 5 ms for sorted 5000. It was way less time in sorted because of the base case that no swaps are made then exit the loop
+
+sort2 uses: merge sort
+
+How do you know?: Took 3.04 ms for random 50000, which is quite efficient. It took 2.5ms for sorted but we are aware running time of merge sort is theta(n log n)
+
+sort3 uses: selection sort
+
+How do you know?: Took around the same time(8ms) to sort random 50000 and sorted 50000. Running time of selection sort is theta(n^2)
