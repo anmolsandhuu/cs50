@@ -56,6 +56,7 @@ int main(int argc, string argv[])
         if (!vote(name))
         {
             printf("Invalid vote.\n");
+            i--;
         }
     }
 
@@ -66,14 +67,52 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    // adding +1 on vote of every candidate voted for
+    for(int i=0; i<candidate_count; i++)
+    {
+        if(strcmp(name, candidates[i].name) == 0){
+            candidates[i].votes = candidates[i].votes + 1;
+
+            return true;
+        }
+    }
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
+
+    candidate temp; //temp variable of candidate type
+
+    //selcetion sort on votes
+    //after this sort the candidate will be in ascending order with respect to their votes
+    for(int i=0; i<candidate_count; i++)
+    {
+        for(int j=i+1; j < candidate_count; j++)
+        {
+            if(candidates[i].votes > candidates[j].votes)
+            {
+                temp = candidates[i];
+
+                candidates[i] = candidates[j];
+
+                candidates[j] = temp;
+            }
+        }
+    }
+
+    int winningVote = candidates[candidate_count-1].votes;
+
+    //loop through all candidate and print their name is their vote is equal to winning vote
+    for(int i=candidate_count-1; i>=0; i--)
+    {
+        if(winningVote == candidates[i].votes)
+        {
+            printf("%s\n", candidates[i].name);
+        }
+    }
+
     return;
 }
 
