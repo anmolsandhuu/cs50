@@ -1,6 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
-
+#include <string.h>
 // Max number of candidates
 #define MAX 9
 
@@ -83,44 +83,119 @@ int main(int argc, string argv[])
                 return 3;
             }
         }
-
         record_preferences(ranks);
+
+        for(int q=0; q<candidate_count; q++)
+        {
+
+            for(int w=0;w<candidate_count;w++)
+            {
+                printf("[%d][%d]:", q, w);
+                printf(" %d ", preferences[q][w]);
+            }
+            printf("\n");
+        }
 
         printf("\n");
     }
 
+
     add_pairs();
     sort_pairs();
-    lock_pairs();
-    print_winner();
+    
+    printf("pair count: %d\n", pair_count);
+    for(int a=0; a<pair_count; a++){
+        printf("pairs winner is %d and loser is %d and pair is (%s,%s)\n", pairs[a].winner, pairs[a].loser, candidates[pairs[a].winner], candidates[pairs[a].loser]);
+    }
+    
+    
+    // lock_pairs();
+    // print_winner();
     return 0;
 }
 
 // Update ranks given a new vote
 bool vote(int rank, string name, int ranks[])
 {
-    // TODO
+    //loop thorugh all candidates
+    for(int i = 0; i < candidate_count; i++)
+    {
+        //check is name is valid if strcmp return 0
+        if(strcmp(candidates[i], name) == 0)
+        {
+            //update the rank
+            ranks[rank] = i;
+            return true;
+        }
+
+    }
     return false;
 }
 
 // Update preferences given one voter's ranks
 void record_preferences(int ranks[])
 {
-    // TODO
+    for(int i=0; i<candidate_count; i++)
+    {
+        printf("DEBUG: ranks[rank: %d] : %d :: %s\n", i+1, ranks[i], candidates[ranks[i]]);
+    }
+     for(int i=0; i<candidate_count; i++)
+    {
+        printf("%d ", ranks[i]);
+    }
+    printf("\n");
+    for(int i=0; i<candidate_count; i++)
+    {
+        for(int j=i+1; j<candidate_count; j++)
+        {
+            printf("preferences[[%d][%d]] : %d\n", ranks[i], ranks[j], preferences[ranks[i]][ranks[j]]);
+            preferences[ranks[i]][ranks[j]]++;
+
+        }
+    }
     return;
 }
 
 // Record pairs of candidates where one is preferred over the other
 void add_pairs(void)
 {
-    // TODO
+    for(int i=0; i<candidate_count; i++)
+    {
+        for(int j=i+1; j<candidate_count; j++)
+        {
+            if(preferences[i][j] < preferences[j][i])
+            {
+                pairs[pair_count].winner = i;
+                pairs[pair_count].loser = j;
+                pair_count++;
+    
+            }
+            else if(preferences[j][i] < preferences[i][j])
+            {
+                pairs[pair_count].winner = j;
+                pairs[pair_count].loser = i;
+                pair_count++;
+            }
+        }
+    }
     return;
 }
 
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    // TODO
+    for(int i=pair_count - 1; i >=0 ; i++)
+    {
+        for(int j=0; j <- i-1; j++)
+        {
+            if((preferences[pairs[j].winner][pairs[j].loser]) > (preferences[pairs[j + 1].winner][pairs[j+1].loser]))
+            {
+                pair temp = pairs[j];
+                pairs[j] = pairs[j+1];
+                pairs[j+1] = temp;
+            }
+        }
+    }
     return;
 }
 
